@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+               xmlns:s="library://ns.adobe.com/flex/spark"
+               xmlns:mx="library://ns.adobe.com/flex/mx"
+               creationComplete="creationCompleteHandler(event)" width="600" height="600">
+    <fx:Metadata>
+        [SWF(width="600", height="600")]
+    </fx:Metadata>
+
+
+    <fx:Style>
+        @namespace s "library://ns.adobe.com/flex/spark";
+        s|Button {skinClass: ClassReference("views.skins.CustomButtonSkin")}
+    </fx:Style>
+
+    <mx:Canvas id="mainContainer" width="100%" height="100%"/>
+    <mx:UIComponent id="modalLayer" width="100%" height="100%"/>
+
+    <fx:Script><![CDATA[
+        import controller.MainController;
+
+        import helpers.navigation.NavigatorController;
+
+        import mx.events.FlexEvent;
+
+        private var controller:MainController;
+
+        private function creationCompleteHandler(event:FlexEvent):void {
+            NavigatorController.instance.init(mainContainer, modalLayer);
+
+            controller = new MainController('data/config.xml')
+        }
+        ]]></fx:Script>
+</s:Application>
